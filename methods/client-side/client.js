@@ -1,7 +1,7 @@
 require("dotenv").config({ path: __dirname + "/.env" });
 
 const app_key = process.env["APP_KEY"];
-const secret = process.env["API_SECRET"];
+// const secret = process.env["API_SECRET"];
 const StreamChat = require("stream-chat").StreamChat;
 
 const { createToken } = require("../server-side/createToken");
