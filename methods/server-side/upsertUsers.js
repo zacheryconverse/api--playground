@@ -13,13 +13,13 @@ const upsertMany = async (users) => {
   return await serverClient.upsertUsers(userArray);
 };
 
-const upsertOne = async (user_id) => {
-  return await serverClient.upsertUser({ id: user_id });
+const upsertOne = async (userId) => {
+  return await serverClient.upsertUser({ id: userId });
 };
 
-const makeAdmin = async (user_id) => {
+const makeAdmin = async (userId) => {
   return await serverClient.upsertUser({
-    id: user_id,
+    id: userId,
     role: "user",
   });
 };

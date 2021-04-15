@@ -1,16 +1,35 @@
-const { chatClient, user_id } = require("./client");
+const { chatClient, userId } = require("./client");
 
-const createChannel = async (type, id, members, name) => {
-  const channel = chatClient.channel(type, id, {
+// Channel ID is optional; if you leave it out, the ID is determined based on the list of members. The channel type controls the settings we’re using for this channel.
+const createChannel = async (cType, cid, members, name) => {
+  const channel = await chatClient.channel(cType, cid, {
     members,
     name,
   });
-  return await channel.create();
+  await channel.create();
+  // return await channel.watch();
+  // fetch the channel state, subscribe to future updates
+
+  const text = "@Zack Hello there zack"
+
+  await channel.sendMessage({
+    text: text,
+    mentioned_users: ['Zack'],
+    sender: userId
+  }).then((res) => console.log('message ID: ', res.message.id));
+
+  return;
+  // channel.on("message.new", (e) => {
+  //   console.log(("received a new message", e.message.text));
+  //   console.log(
+  //     `Now have ${channel.state.messages.length} stored in local state`
+  //   );
+  // });
 };
 
 createChannel(
   "messaging",
-  "testing-playground-03",
+  "testing-playground-04",
   ["steve"],
-  "snoopys secret channel"
-).then((r) => console.log(r));
+  "snoopys secret channel 2"
+).then((r) => console.log('createChannel CALLED', r));

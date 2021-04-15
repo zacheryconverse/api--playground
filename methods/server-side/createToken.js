@@ -4,4 +4,4 @@ const createToken = (userID) => serverClient.createToken(userID);
 
 exports.createToken = createToken;
 
-console.log(createToken(userId));
+// console.log(createToken(userId));

@@ -1,4 +1,4 @@
-const { chatClient, user_id } = require("./client");
+const { chatClient, userId } = require("./client");
 
 const updateChannelPartial = async (type, id, data) => {
   const channel = chatClient.channel(type, id, data);

@@ -1,23 +1,24 @@
 require("dotenv").config({ path: __dirname + "/.env" });
-
-const app_key = process.env["APP_KEY"];
-// const secret = process.env["API_SECRET"];
-const StreamChat = require("stream-chat").StreamChat;
-
 const { createToken } = require("../server-side/createToken");
 
-// For client-side auth the client uses only the app_key
-const chatClient = new StreamChat(app_key);
+const StreamChat = require("stream-chat").StreamChat;
+const apiKey = process.env["API_KEY"];
 
-const user_id = "steve";
+
+// For client-side auth the client uses only the app_key
+// const chatClient = new StreamChat(apiKey); // old way, but backward compatible
+const chatClient = StreamChat.getInstance(apiKey);
+
+const userId = "steve";
 const extraData = {
   type: "doggo",
+  name: "Steven",
 };
 
 // Fetch token from client-side method to create token
-const token = createToken(user_id);
+const token = createToken(userId);
 
-const connect = chatClient.connectUser({ id: user_id, extraData }, token);
+const connect = chatClient.connectUser({ id: userId, extraData }, token);
 
 exports.chatClient = chatClient;
-exports.user_id = user_id;
+exports.userId = userId;
