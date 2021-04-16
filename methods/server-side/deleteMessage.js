@@ -8,8 +8,12 @@ const { serverClient, userId } = require("../server-side/client");
 //   console.log(res)
 // );
 
-const test = async () => {
-  return serverClient.deleteMessage("fc2109d3-131e-4421-9ebc-d1569e007557", true);
-}
+
+// const test = async () => {
+//   return serverClient.deleteMessage(
+//     "04143982-0e4e-4484-8434-8699e5c63f42",
+//     true
+//   );
+// }
 
 test().then(res => console.log('RESULT', res)).catch(err => console.error('ERROR', err));

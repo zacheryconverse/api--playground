@@ -14,13 +14,13 @@ const search = async () => {
   // return await channel.search(filters);
   const someId = "Zachery";
   // return await channel.search({ sender: someId });
-  return await serverClient.search(
+  return await serverClient?.search(
     {
       type: "messaging",
     },
     {
-      "mentioned_users.id": {
-        $contains: "Zack" || "",
+      parent_id: {
+        $ne: "",
       },
     }
   );

@@ -8,7 +8,7 @@ const apiKey = process.env["API_KEY"];
 // const chatClient = new StreamChat(apiKey); // old way, but backward compatible
 const chatClient = StreamChat.getInstance(apiKey);
 
-const userId = "Zachery";
+const userId = "Cody";
 
 // Fetch token from client-side method to create token
 const token = createToken(userId);
@@ -23,7 +23,7 @@ channel.create();
 // return await channel.watch();
 // fetch the channel state, subscribe to future updates
 
-const text = "@Zack Hello there Zachery";
+const text = "@Zack Hello there Steve";
 
 const test = async () => {
   return await channel.sendMessage({
@@ -34,6 +34,6 @@ const test = async () => {
 };
 
 test()
-  .then((res) => console.log("RESULT: ", res.message.mentioned_users))
+  .then((res) => console.log("RESULT: ", res.message))
   .catch((err) => console.log("Error: ", err));
 

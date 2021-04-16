@@ -1,5 +1,5 @@
 require("dotenv").config({ path: __dirname + "/.env" });
-
+// CRA-Chat key and secret
 const app_key = process.env["APP_KEY"];
 const secret = process.env["API_SECRET"];
 const StreamChat = require("stream-chat").StreamChat;
