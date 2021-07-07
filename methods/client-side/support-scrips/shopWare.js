@@ -8,10 +8,10 @@ const apiKey = process.env["API_KEY"];
 // const chatClient = new StreamChat(apiKey); // old way, but backward compatible
 const chatClient = StreamChat.getInstance(apiKey);
 
-const userId = "Cody";
+// const userId = "Cody";
 
 // Fetch token from client-side method to create token
-const token = createToken(userId);
+// const token = createToken(userId);
 
 // const connect = chatClient.connectUser({ id: userId, extraData }, token);
 // chatClient.connectUser({ id: userId }, token);
@@ -23,15 +23,15 @@ const token = createToken(userId);
 // return await channel.watch();
 // fetch the channel state, subscribe to future updates
 
-const text = "@Zack Hello there Steve";
+// const text = "@Zack Hello there Steve";
 
-const test = async () => {
-  return await channel.sendMessage({
-    text: text,
-  });
-};
+// const test = async () => {
+//   return await channel.sendMessage({
+//     text: text,
+//   });
+// };
 
-const userID = "adminUser";
+// const userID = "adminUser";
 
 const createChannel = async () => {
   await chatClient.connectUser({ id: userId }, token);
@@ -52,7 +52,22 @@ const deleteMessage = async (messageId) => {
   return await chatClient.deleteMessage(messageId);
 }
 
-deleteMessage("75f0633b-8c87-4bae-9aa2-974ea0ac8f94")
+const userId = 'Zachery';
+
+// const filter = { type: "messaging" };
+const filter = { type: "messaging", members: { $in: [userId] } };
+const sort = { last_message_at: -1 };
+
+const token = createToken(userId);
+const connect = chatClient.connectUser({ id: userId }, token);
+
+const test = async () => {
+  const results = await chatClient.queryChannels(filter, sort, {});
+  console.log(results);
+  return;
+};
+
+test()
   .then((res) => console.log("RESULT: ", res))
   .catch((err) => console.log("Error: ", err));
 

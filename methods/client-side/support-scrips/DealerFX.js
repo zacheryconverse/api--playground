@@ -7,7 +7,7 @@ const apiKey = process.env["API_KEY"]; // CRA-Chat
 // For client-side auth the client uses only the app_key
 const client = StreamChat.getInstance(apiKey);
 
-// const userId = "Zachery";
+const userId = "Zachery";
 // const extraData = {
 //   image: '',
 // };
@@ -33,17 +33,17 @@ const sendMessage = async () => {
   });
 };
 
-const userID = "adminUser";
+// const userID = "adminUser";
 
 const createChannel = async () => {
   await client.connectUser({ id: userId }, token);
 
-  const channel = client.channel("messaging", "shopWare-01", {
-    members: ["adminUser", "Cody"],
+  const channel = client.channel("messaging", "channel-name", {
+    members: ["Cody", "Zachery"],
   });
   await channel.create();
   const message = await channel.sendMessage({
-    text: "hello there",
+    text: "hello there you",
   });
 
   return message.message.id;
@@ -54,6 +54,21 @@ const deleteMessage = async (messageId) => {
   return await client.deleteMessage(messageId);
 };
 
-deleteMessage("75f0633b-8c87-4bae-9aa2-974ea0ac8f94")
+const filters = { members: { $in: ["Zachery"] } };
+
+const getMessage = async () => {
+  await client.connectUser({ id: "Zachery" }, createToken("Zachery"));
+  // return await client.getMessage(messageId);
+  return await client.search(
+    filters,
+    {
+      'message.id': {
+        $eq: '3c86b3ca-35a2-4b99-8927-9ea455868024'
+      }
+    }
+  )
+};
+
+getMessage()
   .then((res) => console.log("RESULT: ", res))
   .catch((err) => console.log("Error: ", err));

@@ -2,21 +2,27 @@
 const StreamChat = require("stream-chat").StreamChat;
 const { createToken } = require("../server-side/createToken");
 
-const chatClient = StreamChat.getInstance("awdc7hz3vqta ");
+const chatClient = StreamChat.getInstance("awdc7hz3vqta");
 const userId1 = "710QhunBOXgZ3cWmUNliDRgdQMh1";
 const userId2 = "G30XqBvhedaLd2dPMtI0CIYXvy63";
 const userId3 = "steve";
 const userId4 = "Cody";
 
+// const filter = {
+//   type: "messaging",
+//   members: { $in: chatClient.userID },
+//   // members: { $ne: [chatClient.userID] },
+// };
+// const filter = { id: userId3 };
 // const filter = { type: "messaging" };
-const filter = { type: "messaging", members: { $in: [userId4] } };
+const filter = { type: "messaging", members: { $in: ['steve'] } };
 const sort = { last_message_at: -1 };
 
-const token = createToken(userId1);
-const connect = chatClient.connectUser({ id: userId1 }, token);
+const token = createToken(userId2);
+// const connect = chatClient.connectUser({ id: userId2 }, token);
 
 const test = async () => {
-  return chatClient.queryChannels(filter, sort);
+  return chatClient.queryChannels(filter);
 };
 
 test()
@@ -58,8 +64,6 @@ test()
 //   const result = await chatClient.queryChannels(filter, sort);
 //   return result;
 // };
-
-
 
 // onlyMeAndMyFriend("george").then((r) => console.log(r));
 

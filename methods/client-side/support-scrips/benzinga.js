@@ -13,7 +13,7 @@ const client = StreamChat.getInstance(apiKey);
 // };
 
 // Fetch token from client-side method to create token
-const token = createToken(userId);
+// const token = createToken(userId);
 
 // const connect = client.connectUser({ id: userId, extraData }, token);
 // client.connectUser({ id: userId }, token);
@@ -54,6 +54,22 @@ const deleteMessage = async (messageId) => {
   return await client.deleteMessage(messageId);
 };
 
-deleteMessage("75f0633b-8c87-4bae-9aa2-974ea0ac8f94")
+// await client.connectUser({ id: "adminUser" }, createToken("adminUser"));
+const filter = { members: { $in: [userId] } };
+
+const searchUser = async (userId) => {
+  const search = await client.search({
+    members: { $in: [userId] },
+    }, { "text": { "$ne": " " } }
+  );
+
+  return search;
+};
+
+// deleteMessage("75f0633b-8c87-4bae-9aa2-974ea0ac8f94")
+//   .then((res) => console.log("RESULT: ", res))
+//   .catch((err) => console.log("Error: ", err));
+
+searchUser("Zachery")
   .then((res) => console.log("RESULT: ", res))
   .catch((err) => console.log("Error: ", err));

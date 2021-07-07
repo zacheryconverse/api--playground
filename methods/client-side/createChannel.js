@@ -6,17 +6,19 @@ const createChannel = async (cType, cid, members, name) => {
     members,
     name,
   });
-  await channel.create();
+  const query = await channel.query();
+  console.log('query', query);
+  // await channel.create();
   // return await channel.watch();
   // fetch the channel state, subscribe to future updates
 
-  const text = "@Zack Hello there zack"
+  // const text = "@Zack Hello there zack"
 
-  await channel.sendMessage({
-    text: text,
-    mentioned_users: ['Zack'],
-    sender: userId
-  }).then((res) => console.log('message ID: ', res.message.id));
+  // await channel.sendMessage({
+  //   text: text,
+  //   mentioned_users: ['Zack'],
+  //   sender: userId
+  // }).then((res) => console.log('message ID: ', res.message.id));
 
   return;
   // channel.on("message.new", (e) => {
@@ -27,9 +29,11 @@ const createChannel = async (cType, cid, members, name) => {
   // });
 };
 
-createChannel(
-  "messaging",
-  "testing-playground-04",
-  ["steve"],
-  "snoopys secret channel 2"
-).then((r) => console.log('createChannel CALLED', r));
+try {
+  createChannel(
+    "messaging",
+    "testing-playground-04",
+    ["steve"],
+    "snoopys secret channel 2"
+    ).then((r) => console.log('createChannel CALLED', r));
+  } catch (e) {console.log('catch', e);}
